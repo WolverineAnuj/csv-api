@@ -57,17 +57,5 @@ class ApiController extends Controller
 
         return response()->json(['jwt' => compact('token'), 'type' => 'bearer', 'expires_in' => auth()->factory()->getTTL()*60]);
     }
-
-    public function getAuthenticatedUser()
-    {
-        try {
-            if (!$user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['user_not_found'], 404);
-            }
-        } catch (JWTException $e) {
-            return response()->json(['error' => 'could_not_authenticate'], 500);
-        }
-
-        return response()->json(compact('user'));
-    }
+    
 }
