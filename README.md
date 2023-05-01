@@ -36,6 +36,9 @@ Below are the steps to setup the project locally.
     </clipboard-copy>
   </div></div>
 </li>
+
+<li>Setup database in .env
+</li>
 <li>JWT Token
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>php artisan jwt:secret
 </pre><div class="zeroclipboard-container position-absolute right-0 top-0">
