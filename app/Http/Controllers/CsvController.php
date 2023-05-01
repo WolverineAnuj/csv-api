@@ -16,7 +16,7 @@ class CsvController extends Controller
     public function csvImport(Request $request) {
         try {
             if (!$request->hasFile('csv')) {
-                return response()->json(['message' => 'No CSV file uploaded']);
+                return response()->json(['status'=> false,'message' => 'No CSV file uploaded']);
             }
     
             $validator = Validator::make($request->all(), [
@@ -24,7 +24,7 @@ class CsvController extends Controller
             ]);
     
             if ($validator->fails()) {
-                return response()->json(['errors' => $validator->errors()], 400);
+                return response()->json(['status'=> false,'errors' => $validator->errors()], 400);
             }
     
             $file = $request->file('csv');
@@ -44,6 +44,7 @@ class CsvController extends Controller
             // Calculate the number of batches
             $numBatches = ceil($totalRecords / $batchSize);
             $colArray = ['Month','Quarter','State','District'];
+            $succeedRecord = 0;
             for ($i = 0; $i < $numBatches; $i++) {
                 // Get the next batch of records
                 $offset = $i * $batchSize;
@@ -59,33 +60,22 @@ class CsvController extends Controller
                     }
                     $data['jsonData'] = json_encode($record);
                     $finalData[] = $data;
-                    // Find the record in the database based on its ID
-                    // $dbRecord = Record::find($record['id']);
-
-                    // // If the record doesn't exist, create a new one
-                    // if (!$dbRecord) {
-                    //     $dbRecord = new Record;
-                    //     $dbRecord->id = $record['id'];
-                    // }
-
-                    // // Update the fields of the record
-                    // $dbRecord->name = $record['name'];
-                    // $dbRecord->age = $record['age'];
-
-                    // // Save the record to the database
-                    // $dbRecord->save();
                 }
-                // dd($finalData);
-                TblCreditBureauMasterDistrict::insert($finalData);
+                $result = TblCreditBureauMasterDistrict::insert($finalData);
+                if ($result) {
+                    $succeedRecord = $succeedRecord + count($finalData);
+                }
                 // DB::table('tbl_credit_bureau_master_districts')->upsert(
                 //                     $data,
                 //                     ['month','district'],
                 //                     ['jsonData']
                 //                 );
-                // dd($finalData);
             }
+
+            return response()->json(['status'=> true, "msg"=>"records imported successfully", 'succeed_records'=>$succeedRecord], 200);
+
         } catch (Exception $e) {
-            return response()->json(['error' => $e], 500);
+            return response()->json(['status'=> false,'error' => $e], 500);
         }
 
         
