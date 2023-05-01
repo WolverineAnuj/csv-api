@@ -85,11 +85,8 @@ Below are the steps to setup the project locally.
     <ul>PARAMs
         <li>email</li><li>password</li></ul>
     </li>
-    <li>Set CSV API with bearer token:
-        <div>set type bearer in authorization tab & paste the provide token from registeration or login API. 
-            <div>POST request for upload CSV : </div>
-            </div>
-
+    <li>Set CSV API with bearer token:set type bearer in authorization tab & paste the provide token from registeration or login API. POST request for upload CSV :
+        
         <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>localhost:8000/api/csv-import</pre><div class="zeroclipboard-container position-absolute right-0 top-0">
     <clipboard-copy aria-label="Copy" class="ClipboardButton btn js-clipboard-copy m-2 p-0 tooltipped-no-delay" data-copy-feedback="Copied!" data-tooltip-direction="w" value="git clone https://github.com/your_username_/Project-Name.git" tabindex="0" role="button" style="display: inherit;">
       <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon m-2">
