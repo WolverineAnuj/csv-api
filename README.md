@@ -55,6 +55,26 @@ Below are the steps to setup the project locally.
 </ol>
 
 
-
+<b>How to use API:</b>
+<ul>
+    <li>
+        <div>Open POSTMAN run POST request for user registeration to get bearer token: localhost:8000/api/register </div>
+        <div>PARAMs</div>
+        <span>name<span>
+            <span>email<span>
+                <span>password<span>
+                    <span>password_confirmation<span>
+    </li>
+    <li><div>Open POSTMAN run POST request for user login to get bearer token: localhost:8000/api/login </div>
+        <div>PARAMs</div>
+            <span>email<span>
+                <span>password<span>
+    <li>Set CSV API with bearer token:
+        <div>set type bearer in authorization tab & paste the provide token from registeration or login API. 
+            <div>POST request for upload CSV : localhost:8000/api/csv-import</div>
+            </div>
+                    </li>
+    
+</ul>
 
 
